@@ -8,15 +8,16 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root {
-            --bg-base: #F9F7F2; 
+            --bg-base: #FDFBF7; 
             --primary: #3498DB; 
+            --accent: #FFB142;
             --card-white: #FFFFFF;
             --tag-food: #F28482; 
             --tag-shop: #84A59D;
             --tag-beauty: #A29BFE;
-            --tag-info: #54A0FF;
+            --tag-flight: #74B9FF;
         }
-        body { font-family: 'Noto Sans TC', sans-serif; background-color: var(--bg-base); margin: 0; padding-bottom: 90px; color: #4A463F; -webkit-tap-highlight-color: transparent; }
+        body { font-family: 'Noto Sans TC', sans-serif; background-color: var(--bg-base); margin: 0; padding-bottom: 90px; color: #57606F; -webkit-tap-highlight-color: transparent; }
         
         header { 
             background-image: url('https://raw.githubusercontent.com/uyuy0714-bot/busan-2026/main/image_7.jpg'); 
@@ -25,39 +26,53 @@
             position: relative; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
         header::after { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.2); z-index: 1; }
-        header h1 { font-size: 48px; color: white; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); margin: 0; letter-spacing: 12px; z-index: 2; text-shadow: 2px 4px 10px rgba(0,0,0,0.7); font-weight: 700; }
+        header h1 { font-size: 42px; color: white; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); margin: 0; letter-spacing: 10px; z-index: 2; text-shadow: 2px 4px 10px rgba(0,0,0,0.7); font-weight: 700; }
 
-        .date-tabs { display: flex; gap: 10px; overflow-x: auto; padding: 15px; background: rgba(249, 247, 242, 0.9); position: sticky; top: 0; z-index: 1000; backdrop-filter: blur(5px); border-bottom: 1px solid #EAE7E0; }
+        .date-tabs { display: flex; gap: 10px; overflow-x: auto; padding: 15px; background: rgba(253, 251, 247, 0.95); position: sticky; top: 0; z-index: 1000; backdrop-filter: blur(10px); border-bottom: 1px solid #EAE7E0; }
         .date-tabs::-webkit-scrollbar { display: none; }
-        .date-tab { min-width: 90px; padding: 12px 5px; background: #EAE7E0; border: none; border-radius: 18px; font-size: 13px; color: #777; flex-shrink: 0; font-weight: bold; cursor: pointer;}
-        .date-tab.active { background: var(--primary); color: white; box-shadow: 0 4px 10px rgba(52, 152, 219, 0.3); }
+        .date-tab { min-width: 85px; padding: 10px 5px; background: #EEEBE3; border: none; border-radius: 15px; font-size: 13px; color: #888; flex-shrink: 0; font-weight: bold; cursor: pointer; transition: 0.3s; }
+        .date-tab.active { background: var(--accent); color: white; box-shadow: 0 4px 10px rgba(255, 177, 66, 0.3); }
 
         .container { padding: 15px; }
         .day-view { display: none; }
         .day-view.active { display: block; animation: fadeIn 0.4s ease forwards; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
         
-        .card { background: var(--card-white); border-radius: 20px; padding: 18px; margin-bottom: 15px; box-shadow: 0 4px 12px rgba(0,0,0,0.04); border-left: 5px solid var(--primary); }
-        .time { font-size: 12px; color: var(--primary); font-weight: 700; margin-bottom: 4px; display: block; }
-        .spot-name { font-size: 17px; font-weight: 700; margin-bottom: 8px; display: block; color: #2C3E50; }
-        .addr { font-size: 11px; color: #999; display: block; margin-bottom: 8px; line-height: 1.4; background: #FDFCF9; padding: 5px; border-radius: 5px; }
-        .desc { font-size: 13px; color: #666; line-height: 1.6; margin-bottom: 5px; display: block; }
+        .card { background: var(--card-white); border-radius: 18px; padding: 18px; margin-bottom: 15px; box-shadow: 0 4px 12px rgba(0,0,0,0.03); border-left: 6px solid var(--primary); }
+        .card.hotel { border-left-color: #6C5CE7; }
+        .card.flight { border-left-color: var(--tag-flight); }
         
+        .time { font-size: 12px; color: var(--primary); font-weight: 700; margin-bottom: 4px; display: block; }
+        .spot-name { font-size: 17px; font-weight: 700; margin-bottom: 6px; display: block; color: #2F3542; }
+        .addr { font-size: 11px; color: #A4B0BE; display: block; margin-bottom: 8px; line-height: 1.4; padding: 6px; background: #F9F9F9; border-radius: 8px; }
+        .desc { font-size: 13px; color: #747D8C; line-height: 1.6; margin-bottom: 5px; display: block; }
+
         .tag { display: inline-block; padding: 4px 10px; border-radius: 6px; font-size: 10px; font-weight: 700; margin-right: 5px; color: white; margin-bottom: 5px; }
         .tag-food { background: var(--tag-food); }
         .tag-shop { background: var(--tag-shop); }
         .tag-beauty { background: var(--tag-beauty); }
-        .tag-info { background: var(--tag-info); }
+
+        /* 清單樣式 */
+        .list-section { margin-bottom: 25px; }
+        .list-title { font-size: 16px; font-weight: bold; color: var(--accent); margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+        .checklist { list-style: none; padding: 0; margin: 0; }
+        .checklist li { display: flex; align-items: center; gap: 12px; padding: 12px 0; border-bottom: 1px solid #F1F2F6; cursor: pointer; font-size: 14px; }
+        .checklist li.checked { color: #CED4DA; text-decoration: line-through; }
+        .check-box { width: 20px; height: 20px; border-radius: 6px; border: 2px solid #DFE4EA; flex-shrink: 0; position: relative; }
+        .checked .check-box { background: var(--accent); border-color: var(--accent); }
+        .checked .check-box::after { content: '\f00c'; font-family: 'Font Awesome 5 Free'; font-weight: 900; color: white; position: absolute; top: 1px; left: 3px; font-size: 11px; }
 
         .nav-bar { position: fixed; bottom: 0; left: 0; right: 0; background: white; display: flex; justify-content: space-around; padding: 12px 0 25px; border-top: 1px solid #EEE; z-index: 1000; }
-        .nav-item { border: none; background: none; color: #BBB; font-size: 11px; text-align: center; flex: 1; cursor: pointer;}
+        .nav-item { border: none; background: none; color: #A4B0BE; font-size: 11px; text-align: center; flex: 1; cursor: pointer;}
         .nav-item.active { color: var(--primary); }
         .nav-item i { font-size: 22px; display: block; margin-bottom: 5px; }
+
+        .warning-box { background: #FFF0F0; border: 1px solid #FFD1D1; border-radius: 12px; padding: 12px; font-size: 12px; color: #E74C3C; margin-bottom: 15px; line-height: 1.5; }
     </style>
 </head>
 <body>
 
-<header><h1>釜山</h1></header>
+<header><h1>釜山 2026</h1></header>
 
 <div class="date-tabs">
     <button class="date-tab active" onclick="showDay('day1', this)">4/13 (一)</button>
@@ -65,137 +80,113 @@
     <button class="date-tab" onclick="showDay('day3', this)">4/15 (三)</button>
     <button class="date-tab" onclick="showDay('day4', this)">4/16 (四)</button>
     <button class="date-tab" onclick="showDay('day5', this)">4/17 (五)</button>
-    <button class="date-tab" style="background:#84A59D; color:white;" onclick="showDay('check', this)">備忘錄</button>
+    <button class="date-tab" style="background:#84A59D; color:white;" onclick="showDay('check', this)">必備清單</button>
 </div>
 
 <div class="container">
     <div id="day1" class="day-view active">
-        <div class="card"><span class="time">14:00</span><span class="spot-name">抵達釜山金海機場</span></div>
-        <div class="card"><span class="time">16:00</span><span class="spot-name">飯店 Check-in (西面)</span></div>
+        <div class="card flight">
+            <span class="tag tag-info" style="background:#74B9FF">去程航班</span>
+            <span class="spot-name">17:00 起飛 ✈️</span>
+            <span class="desc">訂位代號：<strong>KBCCQJ</strong></span>
+        </div>
+        <div class="card hotel">
+            <span class="tag tag-info" style="background:#6C5CE7">住宿資訊</span>
+            <span class="spot-name">Y Collection Haeundae beach</span>
+            <span class="addr">25, Haeundaehaebyeon-ro 298beon-gil, 海雲台區</span>
+        </div>
     </div>
 
     <div id="day2" class="day-view">
+        <div class="card"><span class="time">09:40</span><span class="spot-name">☑️西面老奶奶換錢所</span><span class="addr">釜山廣域市 釜山鎮區 西面路 56 樓 阿2號</span></div>
+        <div class="card"><span class="time">10:30</span><span class="tag tag-beauty">美容</span><span class="spot-name">第一美髮 Seomyeon (染髮)</span><span class="addr">釜山鎮區 釜田洞 220-1</span></div>
+        <div class="card"><span class="time">13:30</span><span class="tag tag-food">美食</span><span class="spot-name">烤肉的男子 (서면점)</span><span class="addr">13 Dongcheon-ro 95beon-gil, Busanjin</span></div>
         <div class="card">
-            <span class="time">09:40</span>
-            <span class="spot-name">☑️西面老奶奶（那英）換錢所</span>
-            <span class="addr">南韓 부전제1동 서면시장 1 KR 부산광역시 부산진구 서면路 56 樓 阿2號</span>
+            <span class="time">15:00</span><span class="tag tag-shop">逛街</span><span class="spot-name">南浦洞藥局 & BIFF</span>
+            <span class="desc">1. 韓一社藥局 (5分) / 2. Jjang藥局 (5分)</span>
+            <span class="desc">3. BIFF 廣場 (1小時) / 4. Olive Young (0.5小時)</span>
         </div>
-        <div class="card">
-            <span class="time">10:30</span>
-            <span class="tag tag-beauty">美容</span><span class="spot-name">第一美髮 Seomyeon 店 (染髮)</span>
-            <span class="addr">釜山廣域市 釜山鎮區 釜田洞 220-1</span>
-        </div>
-        <div class="card">
-            <span class="time">13:30</span>
-            <span class="tag tag-food">美食</span><span class="spot-name">烤肉的男子 (고기굽는남자)</span>
-            <span class="addr">13 Dongcheon-ro 95beon-gil, Busanjin District</span>
-        </div>
-        <div class="card">
-            <span class="time">15:00</span>
-            <span class="tag tag-shop">逛街</span><span class="spot-name">南浦洞 & 藥局巡禮</span>
-            <span class="desc">1. 韓一社藥局 (各逛 5 分) - 31 Gwangbok-ro</span>
-            <span class="desc">2. Jjang 藥局 (各逛 5 分) - 694 Jungang-daero</span>
-            <span class="desc">3. BIFF 廣場 (停留 1 小時) - 58-1 Gudeok-ro</span>
-            <span class="desc">4. Olive Young (停留 0.5 小時) - 36 BIFF gwangjang-ro</span>
-        </div>
-        <div class="card">
-            <span class="time">18:30</span>
-            <span class="spot-name">釜山塔 (龍頭山公園)</span>
-            <span class="addr">37-55 Yongdusan-gil, Jung-gu</span>
-        </div>
-        <div class="card">
-            <span class="time">21:00</span>
-            <span class="tag tag-shop">採買</span><span class="spot-name">樂天超市 (釜山店)</span>
-            <span class="addr">241 Sincheon-daero, Busanjin District</span>
-        </div>
+        <div class="card"><span class="time">18:30</span><span class="spot-name">釜山塔</span><span class="addr">37-55 Yongdusan-gil, Jung-gu</span></div>
+        <div class="card"><span class="time">21:00</span><span class="tag tag-shop">採買</span><span class="spot-name">樂天超市 (釜山店)</span><span class="addr">241 Sincheon-daero, Busanjin</span></div>
     </div>
 
     <div id="day3" class="day-view">
+        <div class="card"><span class="time">10:00</span><span class="spot-name">海岸列車</span><span class="addr">13 Dalmaji-gil 62beon-gil</span></div>
+        <div class="card"><span class="time">11:00</span><span class="spot-name">Skyline Luge 滑車</span><span class="addr">205 Gijanghaean-ro</span></div>
+        <div class="card"><span class="time">12:00</span><span class="spot-name">海東龍宮寺</span><span class="desc">聽說很值得去！</span></div>
         <div class="card">
-            <span class="time">10:00</span>
-            <span class="spot-name">海岸列車</span>
-            <span class="addr">13 Dalmaji-gil 62beon-gil, Haeundae-gu</span>
+            <span class="time">17:00</span><span class="tag tag-info" style="background:#FF7675">重要預約</span><span class="spot-name">膠囊列車 🚋</span>
+            <span class="desc">編號：<strong>PS26004037563</strong> (17:00-17:30)</span>
         </div>
-        <div class="card">
-            <span class="time">11:00</span>
-            <span class="spot-name">Skyline Luge Busan 滑車</span>
-            <span class="addr">205 Gijanghaean-ro, Gijang-gun</span>
-        </div>
-        <div class="card">
-            <span class="time">12:00</span>
-            <span class="spot-name">海東龍宮寺 (值得去)</span>
-            <span class="addr">86 Yonggung-gil, Gijang-gun</span>
-        </div>
-        <div class="card">
-            <span class="time">17:00</span>
-            <span class="tag tag-info">重要</span><span class="spot-name">膠囊列車 🚋</span>
-            <span class="desc">訂單號：<strong>PS26004037563</strong></span>
-            <span class="desc">時間窗：17:00 ~ 17:30</span>
-        </div>
-        <div class="card">
-            <span class="time">17:45</span>
-            <span class="spot-name">釜山 X the SKY</span>
-            <span class="addr">30 Dalmaji-gil, Haeundae-gu</span>
-        </div>
-        <div class="card">
-            <span class="time">20:00</span>
-            <span class="tag tag-food">美食</span><span class="spot-name">韓牛 Ribs of Legend</span>
-            <span class="addr">Haeundaehaebyeon-ro, 277 3樓</span>
-        </div>
+        <div class="card"><span class="time">17:45</span><span class="spot-name">釜山 X the SKY</span><span class="addr">30 Dalmaji-gil, Haeundae-gu</span></div>
+        <div class="card"><span class="time">20:00</span><span class="tag tag-food">美食</span><span class="spot-name">韓牛 Ribs of Legend</span></div>
     </div>
 
     <div id="day4" class="day-view">
-        <div class="card">
-            <span class="time">09:00</span>
-            <span class="spot-name">甘川文化村 (小王子)</span>
-            <span class="desc">建議第一站先去 (上坡最累)，18:00 關門</span>
-            <span class="addr">沙下區 감내2로151번길 23</span>
-        </div>
-        <div class="card">
-            <span class="time">09:30</span>
-            <span class="spot-name">手翻書 Flipbook Studio</span>
-            <span class="addr">170-1 Gamnae 2-ro</span>
-        </div>
-        <div class="card">
-            <span class="spot-name">國際市場 & 松島纜車</span>
-            <span class="desc">國際市場：55 Gukjesijang 2-gil</span>
-            <span class="desc">松島纜車：171 Songdohaebyeon-ro</span>
-        </div>
-        <div class="card">
-            <span class="spot-name">白淺灘文化村</span>
-            <span class="addr">1043 Yeongseon-dong 4(sa)-ga</span>
-        </div>
-        <div class="card">
-            <span class="time">19:00</span>
-            <span class="spot-name">廣安里夜景</span>
-        </div>
-        <div class="card">
-            <span class="time">20:00</span>
-            <span class="tag tag-food">美食</span><span class="spot-name">Seokhwayeon 烤肉</span>
-            <span class="addr">Suyeong-gu, Gwanganhaebyeon-ro, 199 201號</span>
-        </div>
+        <div class="card"><span class="time">09:00</span><span class="spot-name">甘川文化村 (小王子)</span><span class="desc">最累的一段先去，18:00關門</span></div>
+        <div class="card"><span class="time">09:30</span><span class="spot-name">手翻書 Flipbook Studio</span><span class="addr">170-1 Gamnae 2-ro</span></div>
+        <div class="card"><span class="spot-name">國際市場 / 松島纜車 / 白淺灘</span><span class="desc">依序遊覽，傍晚前往廣安里</span></div>
+        <div class="card"><span class="time">19:00</span><span class="spot-name">廣安里夜景 + 烤肉晚餐</span></div>
     </div>
 
     <div id="day5" class="day-view">
-        <div class="card">
-            <span class="time">08:00</span>
-            <span class="spot-name">海雲台早餐 & 最後採買</span>
-        </div>
-        <div class="card">
-            <span class="time">11:00</span>
-            <span class="spot-name">出發前往機場 ✈️</span>
+        <div class="card"><span class="time">08:00</span><span class="spot-name">海雲台早餐 & 買東西</span></div>
+        <div class="card flight">
+            <span class="tag tag-info" style="background:#74B9FF">回程航班</span>
+            <span class="spot-name">15:00 起飛 ✈️</span>
+            <span class="desc">訂位代號：<strong>D28HQD</strong></span>
         </div>
     </div>
 
     <div id="check" class="day-view">
-        <div class="card"><span class="spot-name">重要預約編號</span><span class="desc">膠囊列車：PS26004037563</span></div>
-        <div class="card"><span class="spot-name">攜帶清單</span><span class="desc">護照、行動電源、交通卡、韓幣現金</span></div>
+        <div class="warning-box">
+            <strong>🚨 入境與藥品須知：</strong><br>
+            1. 提早 60 小時填寫 K-ETA 入境卡。<br>
+            2. <strong>禁止攜帶：</strong>日本 EVE 止痛藥、肉製品、水果。<br>
+            3. 行動電源禁托運，需 100Wh 以下。
+        </div>
+
+        <div class="list-section">
+            <div class="list-title">📄 必備證件與文件</div>
+            <ul class="checklist">
+                <li><div class="check-box"></div> 護照 (正本+影本)</li>
+                <li><div class="check-box"></div> 機票 (電子/紙本)</li>
+                <li><div class="check-box"></div> 飯店訂房確認單</li>
+                <li><div class="check-box"></div> 旅遊保險 / 緊急電話</li>
+                <li><div class="check-box"></div> 2吋照片2張</li>
+            </ul>
+        </div>
+
+        <div class="list-section">
+            <div class="list-title">💰 金錢與支付</div>
+            <ul class="checklist">
+                <li><div class="check-box"></div> 韓幣現金 / 信用卡</li>
+                <li><div class="check-box"></div> 交通卡 (T-Money)</li>
+            </ul>
+        </div>
+
+        <div class="list-section">
+            <div class="list-title">🍼 親子專區</div>
+            <ul class="checklist">
+                <li><div class="check-box"></div> 小孩常備藥品 (感冒/退燒)</li>
+                <li><div class="check-box"></div> 小孩餐具與水壺 / 小玩具</li>
+                <li><div class="check-box"></div> 平板電腦 / 保久乳</li>
+            </ul>
+        </div>
+
+        <div class="list-section">
+            <div class="list-title">🚗 租車必備 (爸爸專區)</div>
+            <ul class="checklist">
+                <li><div class="check-box"></div> 台灣駕照正本 (不能過期)</li>
+                <li><div class="check-box"></div> 日文翻譯本正本 (備用)</li>
+            </ul>
+        </div>
     </div>
 </div>
 
 <nav class="nav-bar">
     <button class="nav-item active" onclick="showDay('day1', document.querySelectorAll('.date-tab')[0])"><i class="fas fa-calendar-day"></i>行程</button>
-    <button class="nav-item" onclick="showDay('check', document.querySelectorAll('.date-tab')[5])"><i class="fas fa-sticky-note"></i>備忘</button>
+    <button class="nav-item" onclick="showDay('check', document.querySelectorAll('.date-tab')[5])"><i class="fas fa-tasks"></i>清單</button>
 </nav>
 
 <script>
@@ -210,6 +201,9 @@
         else navItems[0].classList.add('active');
         window.scrollTo({top: 0, behavior: 'smooth'});
     }
+    document.querySelectorAll('.checklist li').forEach(li => {
+        li.addEventListener('click', () => li.classList.toggle('checked'));
+    });
 </script>
 
 </body>
