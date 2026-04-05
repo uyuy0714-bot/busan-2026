@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>釜山 2026 自由行</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --bg-base: #F9F5F0; /* 米色調 */
+            --primary: #D4A373; /* 暖棕色 */
+            --accent: #E9EDC9;
+            --card-white: #FFFFFF;
+            --tag-food: #F28482;
+            --tag-shop: #84A59D;
+            --tag-alert: #F5CAC3;
+        }
+
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+            background-color: var(--bg-base);
+            margin: 0; padding-bottom: 90px;
+            color: #5D574F;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Header & Date Navigation */
+        header {
+            background: var(--card-white);
+            padding: 20px 15px 10px;
+            text-align: center;
+            border-bottom-left-radius: 25px;
+            border-bottom-right-radius: 25px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+            position: sticky; top: 0; z-index: 1000;
+        }
+
+        h1 { font-size: 20px; margin: 0 0 15px; color: var(--primary); letter-spacing: 1px; }
+
+        .date-tabs {
+            display: flex; gap: 10px; overflow-x: auto;
+            padding: 5px 0 15px; scrollbar-width: none;
+        }
+        .date-tabs::-webkit-scrollbar { display: none; }
+
+        .date-tab {
+            min-width: 65px; padding: 10px 5px;
+            background: #F0EDE9; border: none; border-radius: 15px;
+            font-size: 13px; color: #888; transition: 0.3s;
+        }
+        .date-tab.active {
+            background: var(--primary); color: white;
+            box-shadow: 0 4px 10px rgba(212, 163, 115, 0.4);
+        }
+
+        /* Content Areas */
+        .container { padding: 15px; }
+        .section-view { display: none; }
+        .section-view.active { display: block; animation: fadeIn 0.4s ease; }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Weather Badge */
+        .weather-card {
+            background: rgba(255,255,255,0.6);
+            padding: 12px; border-radius: 15px;
+            margin-bottom: 20px; display: flex; align-items: center; gap: 15px;
+            font-size: 14px; border: 1px dashed var(--primary);
+        }
+
+        /* Card Styles */
+        .card {
+            background: var(--card-white);
+            border-radius: 20px; padding: 18px;
+            margin-bottom: 15px; position: relative;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.02);
+        }
+        .card-time { font-weight: bold; color: var(--primary); font-size: 14px; margin-bottom: 8px; display: block;}
+        .card-title { font-size: 17px; font-weight: 700; margin-bottom: 8px; display: flex; align-items: center; gap: 8px;}
+        .card-content { font-size: 14px; line-height: 1.6; color: #777; }
+        
+        .tag {
+            padding: 2px 8px; border-radius: 6px; font-size: 11px; font-weight: bold;
+            color: white; margin-bottom: 5px; display: inline-block;
+        }
+
+        .nav-btn {
+            display: inline-flex; align-items: center; gap: 5px;
+            background: #F9F5F0; border: 1px solid #E0D8CF;
+            padding: 8px 15px; border-radius: 10px;
+            text-decoration: none; font-size: 13px; color: var(--primary);
+            margin-top: 12px;
+        }
+
+        /* Info Grid */
+        .info-row { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #EEE; font-size: 14px; }
+        .info-row span:first-child { color: #999; }
+
+        /* Bottom Menu */
+        .nav-bar {
+            position: fixed; bottom: 0; left: 0; right: 0;
+            background: white; display: flex; justify-content: space-around;
+            padding: 12px 0 25px; border-top: 1px solid #EEE;
+        }
+        .nav-item { border: none; background: none; color: #BBB; font-size: 11px; text-align: center; }
+        .nav-item.active { color: var(--primary); }
+        .nav-item i { font-size: 20px; display: block; margin-bottom: 5px; }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>2026 釜山春季自由行</h1>
+    <div class="date-tabs" id="dateTabs">
+        <button class="date-tab active" onclick="switchView('d1', this)">4/13(一)</button>
+        <button class="date-tab" onclick="switchView('d2', this)">4/14(二)</button>
+        <button class="date-tab" onclick="switchView('d3', this)">4/15(三)</button>
+        <button class="date-tab" onclick="switchView('d4', this)">4/16(四)</button>
+        <button class="date-tab" onclick="switchView('d5', this)">4/17(五)</button>
+    </div>
+</header>
+
+<div class="container" id="mainContent">
+    <div id="d1" class="section-view active">
+        <div class="weather-info weather-card">
+            <i class="fas fa-moon fa-2x" style="color: #F1C40F"></i>
+            <div><b>金海機場晚間預報</b><br>12°C 晴朗，體感偏涼</div>
+        </div>
+        <div class="card">
+            <span class="card-time">17:00 / 20:30</span>
+            <div class="card-title"><i class="fas fa-plane"></i> 班機抵達與入境</div>
+            <p class="card-content">
+                預定抵達金海機場後出境。<br>
+                <b>重要代號：KBCCQJ</b>
+            </p>
+        </div>
+        <div class="card">
+            <span class="card-time">21:30</span>
+            <div class="card-title"><i class="fas fa-hotel"></i> 下榻 Yeongmu Parade Hotel</div>
+            <p class="card-content">搭乘 Uber 約 40 分鐘抵達海雲台飯店。</p>
+            <a href="https://www.google.com/maps/search/?api=1&query=Yeongmu+Parade+Hotel" class="nav-btn"><i class="fas fa-location-arrow"></i> 飯店導航</a>
+        </div>
+    </div>
+
+    <div id="d2" class="section-view">
+        <div class="weather-info weather-card">
+            <i class="fas fa-sun fa-2x" style="color: #E67E22"></i>
+            <div><b>西面/南浦洞預報</b><br>14°C - 21°C 晴到多雲</div>
+        </div>
+        <div class="card">
+            <span class="card-time">09:00</span>
+            <div class="card-title"><i class="fas fa-scissors"></i> 西面弄頭髮 & 換錢</div>
+            <p class="card-content">老奶奶換錢所換匯後進行美髮行程 (預計 3H)。</p>
+            <a href="https://www.google.com/maps/search/?api=1&query=釜山西面老奶奶換錢所" class="nav-btn">導航至換錢所</a>
+        </div>
+        <div class="card">
+            <span class="card-time">13:00</span>
+            <div class="card-title"><i class="fas fa-utensils"></i> 午餐：83 烤肉</div>
+            <span class="tag" style="background: var(--tag-food);">必吃：橫膈膜肉</span>
+            <p class="card-content">吃完烤肉後可前往拍貼機紀錄心情，隨後前往南浦洞。</p>
+        </div>
+        <div class="card">
+            <span class="card-time">18:00</span>
+            <div class="card-title"><i class="fas fa-moon"></i> 釜山塔夜景 & 採買</div>
+            <span class="tag" style="background: var(--tag-shop);">伴手禮：貝果餅乾</span>
+            <p class="card-content">BIFF 廣場逛街 -> 釜山塔夜景 -> 樂天超市採買完搭計程車回飯店。</p>
+        </div>
+    </div>
+
+    <div id="tools" class="section-view">
+        <div class="card">
+            <div class="card-title">航班與通訊</div>
+            <div class="info-row"><span>去程 4/13</span><span>17:00 / <b>KBCCQJ</b></span></div>
+            <div class="info-row"><span>回程 4/17</span><span>15:00 / <b>D28HQD</b></span></div>
+            <div class="info-row"><span>緊急電話</span><span>112 (警察) / 119 (救護車)</span></div>
+            <div class="info-row"><span>韓國觀光諮詢</span><span>1330 (有中文)</span></div>
+        </div>
+        <div class="card">
+            <div class="card-title">簡易記帳 (Firebase Ready)</div>
+            <div id="expense-list" style="margin-bottom: 10px;">
+                <p style="font-size: 12px; color: #AAA;">(目前為離線預覽模式)</p>
+            </div>
+            <input type="text" id="expName" placeholder="項目" style="width: 50px;">
+            <input type="number" id="expAmt" placeholder="韓幣" style="width: 80px;">
+            <button onclick="addExp()" style="background: var(--primary); color: white; border: none; border-radius: 5px;">＋</button>
+        </div>
+    </div>
+</div>
+
+<nav class="nav-bar">
+    <button class="nav-item active" onclick="switchTab('itinerary')"><i class="fas fa-map-marked-alt"></i>行程</button>
+    <button class="nav-item" onclick="switchTab('tools')"><i class="fas fa-briefcase"></i>工具</button>
+    <button class="nav-item" onclick="window.location.reload()"><i class="fas fa-sync"></i>刷新</button>
+</nav>
+
+<script>
+    function switchView(dayId, btn) {
+        document.querySelectorAll('.section-view').forEach(v => v.classList.remove('active'));
+        document.getElementById(dayId).classList.add('active');
+        document.querySelectorAll('.date-tab').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        switchTab('itinerary');
+    }
+
+    function switchTab(type) {
+        const tabs = document.querySelectorAll('.nav-item');
+        tabs.forEach(t => t.classList.remove('active'));
+        
+        if(type === 'tools') {
+            document.querySelectorAll('.section-view').forEach(v => v.classList.remove('active'));
+            document.getElementById('tools').classList.add('active');
+            tabs[1].classList.add('active');
+        } else {
+            tabs[0].classList.add('active');
+        }
+    }
+
+    function addExp() {
+        const name = document.getElementById('expName').value;
+        const amt = document.getElementById('expAmt').value;
+        if(name && amt) {
+            const div = document.createElement('div');
+            div.className = 'info-row';
+            div.innerHTML = `<span>${name}</span><span>₩${amt}</span>`;
+            document.getElementById('expense-list').appendChild(div);
+            document.getElementById('expName').value = '';
+            document.getElementById('expAmt').value = '';
+        }
+    }
+</script>
+
+</body>
+</html>
